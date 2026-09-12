@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: memory-n-mcp
+    runtime: python
+    region: singapore
+    plan: free
+    branch: main
+    autoDeploy: true
+    buildCommand: pip install -r references/mcp_requirements.txt
+    startCommand: python references/remote_mcp_server.py
+    envVars:
+      - key: MEMORY_TRIGGER_STORAGE_BACKEND
+        value: github
+      - key: MEMORY_TRIGGER_GITHUB_REPO
+        value: tusumy/amao-aevren
+      - key: MEMORY_TRIGGER_GITHUB_BRANCH
+        value: main
+      - key: MEMORY_TRIGGER_GITHUB_PREFIX
+        value: 记忆引擎/state
+      - key: MEMORY_TRIGGER_GITHUB_TOKEN
+        sync: false
+      - key: MEMORY_TRIGGER_WATCH_INTERVAL
+        value: "300"
